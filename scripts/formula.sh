@@ -27,7 +27,6 @@ cat <<EOF
 class ClaudeUsage < Formula
   desc "TUI com o uso de tokens e custo do Claude Code"
   homepage "$repo"
-  version "${version}"
   license "MIT"
 
   on_macos do
