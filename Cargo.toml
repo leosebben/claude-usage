@@ -1,0 +1,19 @@
+[package]
+name = "claude-usage"
+version = "0.1.0"
+description = "TUI com o uso de tokens e custo do Claude Code lido de ~/.claude"
+authors = ["Leonardo Sebben"]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/leosebben/claude-usage"
+
+[dependencies]
+ratatui = "0.30"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dirs = "6"
+chrono = "0.4"
+
+[profile.release]
+strip = true
+lto = true
