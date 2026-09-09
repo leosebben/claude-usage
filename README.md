@@ -41,6 +41,7 @@ Pelo Homebrew:
 
 ```sh
 brew tap leosebben/tap
+brew trust leosebben/tap   # Homebrew 6 exige confiar em taps de terceiros
 brew install claude-usage
 ```
 
