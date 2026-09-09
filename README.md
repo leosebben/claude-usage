@@ -4,21 +4,6 @@ TUI (Rust + ratatui) que mostra o uso de tokens e o custo estimado do Claude
 Code CLI. É a aba "Uso" do [Claude Desk](../claude-memory-editor) refeita para
 o terminal, sem a parte de edição de memória.
 
-```
- claude-usage    1 Hoje  2 7 dias  3 30 dias  4 Tudo   │   Custo  Tokens            6259 respostas
-╭ Custo ────────── 2388 respostas ╮╭ Hoje ─────────── 62 respostas ╮╭ Tokens ──── 1,79 M saída ╮╭ Sessões ─── 44 projetos ╮
-│ US$ 229,69  7 dias              ││ US$ 8,89  5,21 M tokens       ││ 228,53 M  219,91 M lidos ││ 97  1 modelo             │
-╰─────────────────────────────────╯╰───────────────────────────────╯╰──────────────────────────╯╰──────────────────────────╯
-╭ Por dia · máx US$ 77,10 ───────────────────────────────────────────────────────────────────────────── ● fable 5.1 ╮
-│                                        ███████                                                                    │
-│███████ ███████ ▂▂▂▂▂▂▂ ███████ ███████ ███████                                                                    │
-│██55███ ██38███ ██11███ ██22███ ██18███ ██77███ ██8,9██                                                            │
-│ 03/09   04/09   05/09   06/09   07/09   08/09   09/09                                                             │
-╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭ Por modelo ──────────────────── ⏎ filtra modelo ╮╭ Por projeto ─────────────────── ⏎ filtra projeto ╮
-│› ● fable 5.1 █████████████████████ US$ 229,69   ││  pretatemplate-univers… ███████████ US$ 81,46    │
-```
-
 ## De onde vêm os dados
 
 Lê os transcritos `~/.claude/projects/<slug>/<sessão>.jsonl` (ou
@@ -37,7 +22,7 @@ só arquivos novos ou modificados são interpretados de novo.
 
 ## Instalando
 
-Pelo Homebrew:
+Pelo Homebrew (binário pré-compilado, não precisa de Rust):
 
 ```sh
 brew tap leosebben/tap
@@ -45,7 +30,10 @@ brew trust leosebben/tap   # Homebrew 6 exige confiar em taps de terceiros
 brew install claude-usage
 ```
 
-Ou direto do fonte, no `~/.cargo/bin`:
+Ou baixando o binário da [página de releases](https://github.com/leosebben/claude-usage/releases)
+para macOS (ARM e Intel) ou Linux (x86_64 e ARM).
+
+Ou compilando do fonte, no `~/.cargo/bin`:
 
 ```sh
 cargo install --path .
@@ -56,9 +44,10 @@ Para rodar sem instalar: `cargo run --release`.
 ## Publicando uma versão
 
 1. Subir a versão em `Cargo.toml`, commitar e criar a tag `vX.Y.Z`.
-2. `gh release create vX.Y.Z --generate-notes`.
-3. Atualizar `url` e `sha256` em `homebrew/claude-usage.rb` e copiar o arquivo
-   para `Formula/claude-usage.rb` no repositório `homebrew-tap`.
+2. Dar push da tag. O workflow `release.yml` compila para os quatro targets,
+   cria a release com os tarballs, os checksums e a fórmula `claude-usage.rb`
+   gerada por `scripts/formula.sh`.
+3. `scripts/update-tap.sh vX.Y.Z` copia a fórmula para o tap e faz o push.
 
 ## Teclas
 
