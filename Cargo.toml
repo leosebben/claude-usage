@@ -1,6 +1,6 @@
 [package]
 name = "claude-usage"
-version = "0.1.1"
+version = "0.1.2"
 description = "TUI com o uso de tokens e custo do Claude Code lido de ~/.claude"
 authors = ["Leonardo Sebben"]
 edition = "2021"
