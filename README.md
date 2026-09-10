@@ -55,8 +55,8 @@ Para rodar sem instalar: `cargo run --release`.
 | ------------------ | ------------------------------------------- |
 | `1` `2` `3` `4`    | período: hoje, 7 dias, 30 dias, tudo        |
 | `t` / `m`          | alterna entre custo e tokens                |
-| `Tab` / `←` `→` / `h` `l` | painel anterior / seguinte; no gráfico, `←` `→` andam entre os dias |
-| `↑` `↓` / `j` `k`  | move a seleção                              |
+| `Tab` / `←` `→` / `h` `l` | painel anterior / seguinte           |
+| `↑` `↓` / `j` `k`  | move a seleção; no gráfico, andam entre os dias |
 | `Enter` / espaço   | liga ou desliga o filtro do dia/modelo/projeto |
 | `Esc` / `x`        | limpa os filtros                            |
 | `r`                | recarrega os transcritos                    |

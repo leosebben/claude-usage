@@ -239,7 +239,7 @@ fn draw_chart(frame: &mut Frame, app: &App, area: Rect) {
             legend.push(Span::from(short_model(m)).fg(DIM));
         }
     }
-    legend.push(Span::from(" ← → ⏎ filtra dia ").fg(DIM));
+    legend.push(Span::from(" ↑ ↓ ⏎ filtra dia ").fg(DIM));
 
     let focused = app.pane == Pane::Days;
     let cursor = app.selected_in(Pane::Days);
@@ -548,8 +548,8 @@ fn draw_help(frame: &mut Frame, area: Rect) {
     let lines = [
         ("1 2 3 4", "período: hoje, 7 dias, 30 dias, tudo"),
         ("t / m", "alterna entre custo e tokens"),
-        ("Tab / ← → / h l", "painel anterior / seguinte (no gráfico, ← → andam entre os dias)"),
-        ("↑ ↓ / j k", "move a seleção"),
+        ("Tab / ← → / h l", "painel anterior / seguinte"),
+        ("↑ ↓ / j k", "move a seleção (no gráfico, andam entre os dias)"),
         ("PgUp PgDn / u d", "move 10 linhas"),
         ("Home End / g G", "início / fim da lista"),
         ("Enter / espaço", "liga ou desliga o filtro do item (dia, modelo ou projeto)"),
@@ -607,8 +607,8 @@ mod real_home {
         }
         // Painel de dias em foco, cursor dois dias para trás e filtro ligado.
         app.pane = Pane::Days;
-        app.on_key(KeyCode::Left.into());
-        app.on_key(KeyCode::Left.into());
+        app.on_key(KeyCode::Up.into());
+        app.on_key(KeyCode::Up.into());
         app.on_key(KeyCode::Enter.into());
         let mut t = Terminal::new(TestBackend::new(120, 40)).unwrap();
         t.draw(|f| draw(f, &mut app)).unwrap();

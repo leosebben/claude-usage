@@ -219,11 +219,10 @@ impl App {
         }
     }
 
-    /// No painel de dias, `h`/`l` andam entre os dias em vez de trocar de painel.
+    /// `h`/`l` (e `←`/`→`) sempre trocam de painel, inclusive no gráfico de
+    /// dias; lá, `j`/`k` andam entre os dias, para não prender o cursor.
     fn move_horizontal(&mut self, delta: isize) {
-        if self.pane == Pane::Days {
-            self.move_selection(delta);
-        } else if delta > 0 {
+        if delta > 0 {
             self.pane = self.pane.next();
         } else {
             self.pane = self.pane.prev();
