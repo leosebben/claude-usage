@@ -239,7 +239,7 @@ fn draw_chart(frame: &mut Frame, app: &App, area: Rect) {
             legend.push(Span::from(short_model(m)).fg(DIM));
         }
     }
-    legend.push(Span::from(" ↑ ↓ ⏎ filtra dia ").fg(DIM));
+    legend.push(Span::from(" "));
 
     let focused = app.pane == Pane::Days;
     let cursor = app.selected_in(Pane::Days);
@@ -339,11 +339,15 @@ fn short_value(v: f64, metric: Metric) -> String {
 
 fn pane_block(title: &str, focused: bool, hint: &str) -> Block<'static> {
     let border = if focused { ACCENT } else { DIM };
-    Block::bordered()
+    let block = Block::bordered()
         .border_type(BorderType::Rounded)
         .border_style(Style::new().fg(border))
-        .title(Span::from(format!(" {title} ")).bold())
-        .title_top(Line::from(Span::from(format!(" {hint} ")).fg(DIM)).right_aligned())
+        .title(Span::from(format!(" {title} ")).bold());
+    if hint.is_empty() {
+        block
+    } else {
+        block.title_top(Line::from(Span::from(format!(" {hint} ")).fg(DIM)).right_aligned())
+    }
 }
 
 struct BarItem {
@@ -412,12 +416,7 @@ fn truncate(s: &str, w: usize) -> String {
 
 fn draw_bar_pane(frame: &mut Frame, app: &App, area: Rect, pane: Pane, title: &str, items: Vec<BarItem>) {
     let focused = app.pane == pane;
-    let hint = match pane {
-        Pane::Models => "⏎ filtra modelo",
-        Pane::Projects => "⏎ filtra projeto",
-        Pane::Days | Pane::Sessions => "",
-    };
-    let block = pane_block(title, focused, hint);
+    let block = pane_block(title, focused, "");
     let inner = block.inner(area);
     frame.render_widget(block, area);
     if items.is_empty() {
